@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Student } from '../../shared/student.model';
+
 
 @Component({
   // select: '[app-server]',
@@ -8,37 +8,48 @@ import { Student } from '../../shared/student.model';
   styleUrls: ['./server.component.css']
 })
 export class ServerComponent {
-    serverId = 10;
-    serverStatus = 'offLine';
-    counter = 0;
-    isLogin = false;
-    userName: string;
-    students: Student[] = [new Student('Bill Gates', 'Computer Science'),
-                           new Student('Steve Jobs', 'Computer Science'),
-                           new Student('Elon Musk', 'Computer Science')];
+  meats = ['Chicken', 'Beef', 'Pork'];
+  veggies = ['Broccoli', 'Mushroom', 'Green Pepper'];
+  meat_choice: string;
+  veggie_choice: string;
+  meat_status = 0;
+  veggie_status = 0;
+  success = 0;
+  fail = 0;
+  dish_name: string;
 
-    getServerStatus() {
-      return this.serverStatus;
+  pickMeat(type: string){
+    this.meat_status = 1;
+    this.meat_choice = type;
+  }
+  pickVeggie(type: string){
+    this.veggie_status = 1;
+    this.veggie_choice = type;
+  }
+
+  restart(){
+    this.meat_choice = '';
+    this.veggie_choice = '';
+    this.meat_status = 0;
+    this.veggie_status = 0;
+    this.success = 0;
+    this.fail = 0;
+  }
+  checkOrder(){
+    if(this.meat_choice == 'Chicken' && this.veggie_choice == 'Mushroom'){
+      this.success = 1;
+      this.dish_name = 'Mushroom chicken';
+    }else if(this.meat_choice == 'Beef' && this.veggie_choice == 'Broccoli'){
+      this.success = 1;
+      this.dish_name = 'Broccoli beef';
+    }else if(this.meat_choice == 'Pork' && this.veggie_choice == 'Green Pepper'){
+      this.success = 1;
+      this.dish_name = 'Spicy pork';
+    }
+    else{
+      this.fail = 1;
     }
 
-    counterPlus() {
-     this.counter ++;
-    }
+  }
 
-    resetCounter() {
-      this.counter = 0;
-    }
-
-    login() {
-      this.isLogin = true;
-    }
-
-    signOut() {
-      this.isLogin = false;
-    }
-
-    // Event Binding
-    onUpdateUserName(event: Event) {
-      this.userName = (<HTMLInputElement>event.target).value;
-    }
 }

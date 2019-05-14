@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+  background-color: khaki;
+}
+
+.webname{
+  display: flex;
+  justify-content: center;
+  color: coral;
+}
